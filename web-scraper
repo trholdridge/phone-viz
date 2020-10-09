@@ -8,3 +8,11 @@ Created on Thu Oct  8 20:06:43 2020
 
 from bs4 import BeautifulSoup
 
+# first, use the list of languages in the Help:IPA category 
+# on Wikipedia (https://en.wikipedia.org/wiki/Help:IPA)
+
+# for each language, navigate to Help:IPA/[Language]
+# then, extract every IPA consonant listed
+
+# finally, store the list of consonants in unicode or maybe
+# a bitmap or something
