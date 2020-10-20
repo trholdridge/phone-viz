@@ -11,12 +11,26 @@ import requests
 
 # first, get the list of languages in the Help:IPA category 
 # on Wikipedia (https://en.wikipedia.org/wiki/Help:IPA)
-lang_directory_url = 'https://en.wikipedia.org/wiki/Help:IPA'
-lang_directory = requests.get(lang_directory_url)
-directory_soup = BeautifulSoup(lang_directory.content, 'html.parser')
 
-test = directory_soup.find(id='International_Phonetic_Alphabet_keys')
+# use requests and beautiful soup to grab wiki page contents
+parent_url = 'https://en.wikipedia.org/wiki/Help:IPA'
+parent_page = requests.get(parent_url)
+directory_soup = BeautifulSoup(parent_page.content, 'html.parser')
 
+# narrow down content to the section we want
+table_container = directory_soup.find('div',attrs={'aria-labelledby' : 'International_Phonetic_Alphabet_keys'})
+table_section = table_container.find('td')
+table_links = table_section.find_all('a')
+
+# add urls to a list
+lang_dir_long = []
+for link in table_links:
+    lang_dir_long.append(link.get('href')) # extract url from 'a' object
+
+# shorten to just language name as used in url
+lang_dir = []
+for link in lang_dir_long:
+    lang_dir.append(link[15:])
 
 # for each language, navigate to Help:IPA/[Language]
 # then, extract every IPA consonant listed
