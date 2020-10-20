@@ -7,9 +7,16 @@ Created on Thu Oct  8 20:06:43 2020
 """
 
 from bs4 import BeautifulSoup
+import requests
 
-# first, use the list of languages in the Help:IPA category 
+# first, get the list of languages in the Help:IPA category 
 # on Wikipedia (https://en.wikipedia.org/wiki/Help:IPA)
+lang_directory_url = 'https://en.wikipedia.org/wiki/Help:IPA'
+lang_directory = requests.get(lang_directory_url)
+directory_soup = BeautifulSoup(lang_directory.content, 'html.parser')
+
+test = directory_soup.find(id='International_Phonetic_Alphabet_keys')
+
 
 # for each language, navigate to Help:IPA/[Language]
 # then, extract every IPA consonant listed
