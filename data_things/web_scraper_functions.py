@@ -5,10 +5,8 @@ Created on Thu Oct  8 20:06:43 2020
 
 @author: tulasiholdridge
 """
-import numpy as np
 from bs4 import BeautifulSoup
 import requests
-
 
 # create_lang_list : _ -> List
 # creates an array of strings, where each string is a language
@@ -63,19 +61,28 @@ def scrape_ipa(lang):
     # most pages are formatted a certain way, but some won't be
     if (test_table_format is None):
         # cheesing it for now
-        return []
+        return
     
     # if it's the normal formatting, go through the procedure
     consonant_table_raw = test_table_format.parent.parent.parent
-    consonant_table = consonant_table_raw.find_all('tr')[2:]
-    consonant_links = [table_row.find('a') for table_row in consonant_table]
-    
+    consonant_table = consonant_table_raw.find_all('tr')
+    consonant_links = []
+    # if the row has no link, don't use it. if it does, add it to list
+    for table_row in consonant_table:
+        temp = table_row.find('a') # will be None if the row doesn't have a link
+        if (temp is not None):
+            consonant_links.append(temp)
+
     #add consonants to a list
     consonants = []
     for link in consonant_links:
-        consonants.append(link.contents)
+        try:
+            temp_class = link.parent['class'] # is there a class?
+            if (temp_class[0] == 'IPA'): # if the row has a consonant
+                consonants.append(link.contents[0]) # just the text
+        except KeyError: # if no parent class
+            continue
     
     #return list of consonants
     return consonants
-    
 
