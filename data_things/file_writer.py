@@ -14,5 +14,3 @@ with open("phonology_data.csv", "w") as csvfile:
     writer.writerow(['Language', 'Consonants'])
     for lang, consonants in phonologies.items():
         writer.writerow([lang, consonants])
-
-# test change
