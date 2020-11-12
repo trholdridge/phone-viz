@@ -8,9 +8,10 @@ Created on Thu Oct  8 20:06:43 2020
 from bs4 import BeautifulSoup
 import requests
 
-# create a dictionary that maps langs to their phonologies
+# make_phonology_dict : [List-of String] [List-of Set] -> Dict
+# create a dictionary that maps languages to their phonologies
 def make_phonology_dict(langs,consonant_sets):
-    dict(zip(langs, consonant_sets))
+    return dict(zip(langs, consonant_sets))
 
 # make_lang_list : _ -> [List-of String]
 # creates a list of strings, where each string is a language
@@ -38,7 +39,6 @@ def make_lang_list():
         
     # return list of language names
     return lang_dir
-
 
 # make_consonant_list : List -> [List-of Set]
 # navigates to the Help:IPA/[Language] page for every language in a list
