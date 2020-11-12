@@ -8,10 +8,14 @@ Created on Thu Oct  8 20:06:43 2020
 from bs4 import BeautifulSoup
 import requests
 
-# create_lang_list : _ -> List
-# creates an array of strings, where each string is a language
+# create a dictionary that maps langs to their phonologies
+def make_phonology_dict(langs,consonant_sets):
+    dict(zip(langs, consonant_sets))
+
+# make_lang_list : _ -> [List-of String]
+# creates a list of strings, where each string is a language
 # under wikipedia's directory of Help:IPA pages
-def create_lang_list():
+def make_lang_list():
     # use requests and beautiful soup to grab wiki page contents
     parent_url = 'https://en.wikipedia.org/wiki/Help:IPA'
     parent_page = requests.get(parent_url)
@@ -36,20 +40,20 @@ def create_lang_list():
     return lang_dir
 
 
-# scrape_ipa_pages : List -> List
+# make_consonant_list : List -> [List-of Set]
 # navigates to the Help:IPA/[Language] page for every language in a list
-# and puts its consonants in a new list of lists
-def scrape_ipa_pages(lang_list):
+# and puts the set of its consonants in a list
+def make_consonant_list(lang_list):
     url_prefix = "https://en.wikipedia.org/wiki/Help:IPA/"
     # this won't be run often, so not worried about vectorization
     consonant_lists = [scrape_ipa(url_prefix + lang) for lang in lang_list]
     
-    #return list of consonant lists
+    #return list of consonant sets
     return consonant_lists
     
-# scrape_ipa : String -> List
+# scrape_ipa : String -> [List-of Set]
 # gets all IPA consonants from a url specified by the String, and returns
-# them in list form
+# them in set form
 def scrape_ipa(lang):
     # use requests and beautiful soup to grab wiki page contents
     lang_page = requests.get(lang)
@@ -83,6 +87,6 @@ def scrape_ipa(lang):
         except KeyError: # if no parent class
             continue
     
-    #return list of consonants
-    return consonants
+    #return set of consonants
+    return set(consonants)
 
