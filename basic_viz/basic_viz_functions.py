@@ -9,7 +9,8 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 # first, access the already-created phonology data
-phono_df_raw = pd.read_csv("../data_things/phonology_data.csv")
+phono_df_raw = pd.read_csv("../data_things/phonology_data.csv",
+                           dtype={"Language": str, "Consonants": list})
 
 # 'Consonants == Consonants' ensures that it isn't NaN
 filter_langs = 'Consonants == Consonants & Consonants != []'
@@ -36,20 +37,15 @@ SUCCESSFUL_LANGS = phono_df.shape[0]
 # finds which language in a df has the least consonants
 # def least_consonants:
 
-# avg_consonants : DF -> Number
+# avg_num_consonants : DF -> Number
 # finds average number of consonants for all langs in the df
-# def avg_consonants:
+# def avg_num_consonants:
 
-# median_consonants : DF -> Number
+# median_num_consonants : DF -> Number
 # finds median number of consonants for all langs in the df
-# def median_consonants:
+def median_num_consonants():
+    return phono_df['Consonants'].median
 
-# manipulate_num_consonants_list : {X} DF [[[List-of Numbers]] -> X] -> X
-# abstraction 
-# def manipulate_num_consonants_list:
-    
-# def list_num_consonants:
-    
 
 # def num_consonants_histo:
 
