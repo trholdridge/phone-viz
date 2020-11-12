@@ -6,6 +6,7 @@ Created on Tue Nov 10 22:36:38 2020
 @author: tulasiholdridge
 """
 import pandas as pd
+import matplotlib.pyplot as plt
 
 # first, access the already-created phonology data
 phono_df_raw = pd.read_csv("../data_things/phonology_data.csv")
@@ -22,3 +23,36 @@ phono_df = phono_df_raw.query(filter_langs).reset_index(drop=True)
 TOTAL_LANGS = phono_df_raw.shape[0]
 # number of languages where consonants were successfully scraped
 SUCCESSFUL_LANGS = phono_df.shape[0]
+
+#-----------------------------------------------------#
+#--------------------- functions ---------------------#
+#-----------------------------------------------------#
+
+# most_consonants : DF -> String
+# finds which language in a df has the most consonants
+# def most_consonants:
+
+# least_consonants : DF -> String
+# finds which language in a df has the least consonants
+# def least_consonants:
+
+# avg_consonants : DF -> Number
+# finds average number of consonants for all langs in the df
+# def avg_consonants:
+
+# median_consonants : DF -> Number
+# finds median number of consonants for all langs in the df
+# def median_consonants:
+
+# manipulate_num_consonants_list : {X} DF [[[List-of Numbers]] -> X] -> X
+# abstraction 
+# def manipulate_num_consonants_list:
+    
+# def list_num_consonants:
+    
+
+# def num_consonants_histo:
+
+# def consonant_frequency:
+
+# def list_all_consonants:
