@@ -5,12 +5,12 @@ Created on Tue Nov 10 22:36:38 2020
 
 @author: tulasiholdridge
 """
-import pickle
+import json
 import matplotlib.pyplot as plt
 
 # first, access the already-created phonology data
-with open('file.txt', 'rb') as txtfile:
-  phono_dict_raw = pickle.loads(txtfile.read())
+with open('../data_things/phonology_data.txt') as txtfile:
+  phono_dict_raw = json.load(txtfile)
 
 #phono_df_raw = pd.read_csv("../data_things/phonology_data.csv",
                            #dtype={"Language": str, "Consonants": list})

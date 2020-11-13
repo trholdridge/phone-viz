@@ -8,7 +8,7 @@ Created on Thu Oct  8 20:06:43 2020
 from bs4 import BeautifulSoup
 import requests
 
-# make_phonology_dict : [List-of String] [List-of Set] -> Dict
+# make_phonology_dict : [List-of String] [List-of [List-of String]] -> Dict
 # create a dictionary that maps languages to their phonologies
 def make_phonology_dict(langs,consonant_sets):
     return dict(zip(langs, consonant_sets))
@@ -40,9 +40,9 @@ def make_lang_list():
     # return list of language names
     return lang_dir
 
-# make_consonant_list : List -> [List-of Set]
+# make_consonant_list : List -> [List-of [List-of String]]
 # navigates to the Help:IPA/[Language] page for every language in a list
-# and puts the set of its consonants in a list
+# and puts the list of its consonants in a list
 def make_consonant_list(lang_list):
     url_prefix = "https://en.wikipedia.org/wiki/Help:IPA/"
     # this won't be run often, so not worried about vectorization
@@ -51,9 +51,9 @@ def make_consonant_list(lang_list):
     #return list of consonant sets
     return consonant_lists
     
-# scrape_ipa : String -> [List-of Set]
+# scrape_ipa : String -> [List-of [List-of String]]
 # gets all IPA consonants from a url specified by the String, and returns
-# them in set form
+# them in list form
 def scrape_ipa(lang):
     # use requests and beautiful soup to grab wiki page contents
     lang_page = requests.get(lang)
@@ -88,5 +88,5 @@ def scrape_ipa(lang):
             continue
     
     #return set of consonants
-    return set(consonants)
+    return consonants
 
