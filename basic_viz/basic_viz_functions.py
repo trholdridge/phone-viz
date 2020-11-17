@@ -12,12 +12,30 @@ import matplotlib.pyplot as plt
 with open('../data_things/phonology_data.txt') as txtfile:
   phono_dict_raw = json.load(txtfile)
 
-#phono_df_raw = pd.read_csv("../data_things/phonology_data.csv",
-                           #dtype={"Language": str, "Consonants": list})
+#-----------------------------------------------------#
+#------------------ processing dict ------------------#
+#-----------------------------------------------------#
 
-# 'Consonants == Consonants' ensures that it isn't NaN
-#filter_langs = 'Consonants == Consonants & Consonants != []'
-#phono_df = phono_df_raw.query(filter_langs).reset_index(drop=True)
+# filter_dict : Dict -> Dict
+# removes entries where no phonemes were extracted
+def filter_dict(d):
+    return (dict(filter(is_valid_entry, d.items())))
+
+# is_valid_entry : DictItem -> Boolean
+# is the phoneme portion of an entry in the phoneme dictionary 
+# a list with > 0 elements?
+def is_valid_entry(e):
+    return (isinstance(e[1], list) and len(e[1]) > 0)
+
+# dict_lists_to_sets : Dict -> Dict
+# converts phoneme lists in dict to sets
+def dict_lists_to_sets(d):
+    return (dict(map(entry_list_to_set, d.items())))
+            
+# entry_list_to_set : DictItem -> DictItem
+# changes the list of phonemes in a dict entry to a set of phonemes
+def entry_list_to_set(e):
+    return (e[0], set(e[1]))
 
 #-----------------------------------------------------#
 #--------------------- constants ---------------------#
