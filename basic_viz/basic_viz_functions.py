@@ -8,9 +8,16 @@ Created on Tue Nov 10 22:36:38 2020
 import json
 import matplotlib.pyplot as plt
 
-# first, access the already-created phonology data
-with open('../data_things/phonology_data.txt') as txtfile:
-  phono_dict_raw = json.load(txtfile)
+
+#-----------------------------------------------------#
+#------------------- creating dict -------------------#
+#-----------------------------------------------------#
+
+# create_dict : _ -> Dict
+# imports phoneme dictionary from .txt data file
+def create_dict():
+    with open('../data_things/phonology_data.txt') as txtfile:
+        return json.load(txtfile)
 
 #-----------------------------------------------------#
 #------------------ processing dict ------------------#
@@ -38,34 +45,29 @@ def entry_list_to_set(e):
     return (e[0], set(e[1]))
 
 #-----------------------------------------------------#
-#--------------------- constants ---------------------#
-#-----------------------------------------------------#
-
-# number of languages listed on the wikipedia directory page
-#TOTAL_LANGS = phono_df_raw.shape[0]
-# number of languages where consonants were successfully scraped
-#SUCCESSFUL_LANGS = phono_df.shape[0]
-
-#-----------------------------------------------------#
 #--------------------- functions ---------------------#
 #-----------------------------------------------------#
+    
+# count_langs : Dict -> Nat
+# counts number of entries in a dictionary
+def count_langs(d):
+    return len(d)
 
-# most_consonants : DF -> String
-# finds which language in a df has the most consonants
-# def most_consonants:
+# most_consonants : Dict -> String
+# finds which language in a dict has the most consonants
+# def most_consonants(d):
 
-# least_consonants : DF -> String
-# finds which language in a df has the least consonants
-# def least_consonants:
+# least_consonants : Dict -> String
+# finds which language in a dict has the least consonants
+# def least_consonants(d):
 
-# avg_num_consonants : DF -> Number
-# finds average number of consonants for all langs in the df
-# def avg_num_consonants:
+# avg_num_consonants : Dict -> Number
+# finds average number of consonants for all langs in a dict
+# def avg_num_consonants(d):
 
-# median_num_consonants : DF -> Number
-# finds median number of consonants for all langs in the df
-#def median_num_consonants():
-    #return phono_df['Consonants'].median
+# median_num_consonants : Dict -> Number
+# finds median number of consonants for all langs in a dict
+#def median_num_consonants(d):
 
 
 # def num_consonants_histo:
