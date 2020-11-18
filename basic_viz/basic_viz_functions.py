@@ -6,6 +6,7 @@ Created on Tue Nov 10 22:36:38 2020
 @author: tulasiholdridge
 """
 import json
+import statistics as stats
 import matplotlib.pyplot as plt
 
 
@@ -53,21 +54,29 @@ def entry_list_to_set(e):
 def count_langs(d):
     return len(d)
 
+# analyze_num_consonants : {X} [[List-of Number] -> X] Dict -> X
+def analyze_num_consonants(f,d):
+    return f([len(consonants) for consonants in d.values()])
+
 # most_consonants : Dict -> String
 # finds which language in a dict has the most consonants
-# def most_consonants(d):
+def most_consonants(d):
+    return analyze_num_consonants(max,d)
 
 # least_consonants : Dict -> String
 # finds which language in a dict has the least consonants
-# def least_consonants(d):
+def least_consonants(d):
+    return analyze_num_consonants(min,d)
 
 # avg_num_consonants : Dict -> Number
 # finds average number of consonants for all langs in a dict
-# def avg_num_consonants(d):
+def avg_num_consonants(d):
+    return analyze_num_consonants(stats.mean,d)
 
 # median_num_consonants : Dict -> Number
 # finds median number of consonants for all langs in a dict
-#def median_num_consonants(d):
+def median_num_consonants(d):
+    return analyze_num_consonants(stats.median,d)
 
 
 # def num_consonants_histo:
