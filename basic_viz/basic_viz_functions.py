@@ -83,4 +83,8 @@ def median_num_consonants(d):
 
 # def consonant_frequency:
 
-# def list_all_consonants:
+# list_all_consonants : Dict -> Set
+# returns all consonants present in the phoneme dictionary
+def list_all_consonants(d):
+    return set().union(*[consonants for consonants in d.values()])
+    
