@@ -8,6 +8,7 @@ Created on Tue Nov 10 22:36:38 2020
 import json
 import statistics as stats
 import matplotlib.pyplot as plt
+plt.ioff() # don't automatically show figures
 
 
 #-----------------------------------------------------#
@@ -34,6 +35,7 @@ def filter_dict(d):
 # a list with > 0 elements?
 def is_valid_entry(e):
     return (isinstance(e[1], list) and len(e[1]) > 0)
+
 
 # dict_lists_to_sets : Dict -> Dict
 # converts phoneme lists in dict to sets
@@ -78,9 +80,19 @@ def avg_num_consonants(d):
 def median_num_consonants(d):
     return analyze_num_consonants(stats.median,d)
 
-
 # def num_consonants_histo:
-
+# plots a histogram with number of consonants in each lang
+def num_consonants_histo(d):
+    fig = plt.figure()
+    plt.hist(analyze_num_consonants(lambda x : x, d), 
+             range(least_consonants(d),most_consonants(d),3), 
+             color='pink')
+    plt.xticks(range(least_consonants(d),most_consonants(d),3))
+    plt.xlabel("Number of consonants")
+    plt.ylabel("Number of languages")
+    plt.title("How many consonants do languages have?")
+    return fig
+    
 # def consonant_frequency:
 
 # list_all_consonants : Dict -> Set
